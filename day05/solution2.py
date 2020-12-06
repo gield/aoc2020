@@ -7,6 +7,6 @@ for boarding_pass in boarding_passes:
     col_number = int(boarding_pass[7:].replace("L", "0").replace("R", "1"), 2)
     seat_ids.append(row_number * 8 + col_number)
 
-for seat_id in range(min(seat_ids), max(seat_ids) + 1):
-    if seat_id not in seat_ids and seat_id + 1 in seat_ids and seat_id - 1 in seat_ids:
-        print(seat_id)
+for seat in range(min(seat_ids), max(seat_ids) + 1):
+    if seat not in seat_ids and seat + 1 in seat_ids and seat - 1 in seat_ids:
+        print(seat)
