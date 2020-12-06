@@ -1,0 +1,9 @@
+name: aoc-2020-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - flake8
+  - mypy
+  - pip
+  - python=3.9
