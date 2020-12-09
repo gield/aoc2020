@@ -5,8 +5,8 @@ with open("input.txt", "r") as f:
 
 rules = {}
 for r in raw_rules:
-    key, raw_values = re.compile("([a-z ]*) bags contain (.*)").findall(r)[0]
-    parsed_values = re.compile("(\d) ([a-z ]*) bag").findall(raw_values)
+    key, raw_values = re.compile(r"([a-z ]*) bags contain (.*)").findall(r)[0]
+    parsed_values = re.compile(r"(\d) ([a-z ]*) bag").findall(raw_values)
     values = {color: int(num) for num, color in parsed_values}
     rules[key] = values
 
