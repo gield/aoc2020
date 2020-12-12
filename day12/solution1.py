@@ -1,25 +1,18 @@
-from enum import Enum
-
 with open("input.txt", "r") as f:
     instructions = [(l[0], int(l[1:])) for l in f.readlines()]
 
 
-class Direction(Enum):
-    NORTH = 0
-    EAST = 1
-    SOUTH = 2
-    WEST = 3
-
-    def turn(self, degrees):
-        num_turns = degrees / 90
-        return Direction((self.value + num_turns) % 4)
+def rotate(dx, dy, degrees):
+    num_turns = (degrees / 90) % 4
+    while num_turns:
+        dx, dy = dy, -dx
+        num_turns -= 1
+    return dx, dy
 
 
 x, y = 0, 0
-direction = Direction.EAST
+dx, dy = 1, 0
 for action, value in instructions:
-    if action == "F":
-        action = direction.name[0]  # e.g. EAST becomes E
     if action == "N":
         y += value
     elif action == "S":
@@ -29,8 +22,11 @@ for action, value in instructions:
     elif action == "W":
         x -= value
     elif action == "L":
-        direction = direction.turn(-value)
+        dx, dy = rotate(dx, dy, -value)
     elif action == "R":
-        direction = direction.turn(value)
+        dx, dy = rotate(dx, dy, value)
+    elif action == "F":
+        x += value * dx
+        y += value * dy
 
 print(abs(x) + abs(y))
