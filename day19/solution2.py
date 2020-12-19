@@ -28,7 +28,7 @@ def create_regex(rule_i):
         rule_31 = create_regex(31)
         regex = []
         for i in range(1, 100):
-            regex.append(rule_42 + "{" + str(i) + "}" + rule_31 + "{" + str(i) + "}")
+            regex.append(f"{rule_42}{{{i}}}{rule_31}{{{i}}}")
         return "(?:" + "|".join(regex) + ")"
     else:
         regex = "|".join("".join(create_regex(i) for i in subrule) for subrule in rule)
