@@ -5,5 +5,6 @@ channels:
 dependencies:
   - flake8
   - mypy
+  - numpy
   - pip
   - python=3.9
