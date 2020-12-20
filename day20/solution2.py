@@ -61,19 +61,16 @@ top_left_tile_n = next(n for n, num_sides in num_fitting_sides.items() if num_si
 # Find the permutation of the top-left tile where it fits in the top-left corner
 # Note: there are 2 possible permutations where this is true, we only need 1
 for top_left_permutation in permutations[top_left_tile_n]:
-    is_possibility = True
     for n, tile in tiles.items():
         relevant_permutations = [p
                                 for current_n, current_permutations in permutations.items()
                                 for p in current_permutations
                                 if current_n != top_left_tile_n]
         if any(is_tile1_above_tile2(p, top_left_permutation) for p in relevant_permutations):
-            is_possibility = False
             break
         if any(is_tile1_left_of_tile2(p, top_left_permutation) for p in relevant_permutations):
-            is_possibility = False
             break
-    if is_possibility:
+    else:
         top_left_tile = top_left_permutation
         break  # There are actually 2 possibilities, we only need 1
 
@@ -137,16 +134,13 @@ for image_permutation in get_permutations(image):
     image_permutation_found = image_permutation.copy()
     for row in range(num_rows):
         for col in range(num_cols):
-            is_found = True
             for sm_row, sm_col in sea_monster_coordinates:
                 new_row, new_col = row + sm_row, col + sm_col
                 if not 0 <= new_row < num_rows or not 0 <= new_col < num_cols:
-                    is_found = False
                     break
                 if image_permutation[new_row, new_col] != 1:
-                    is_found = False
                     break
-            if is_found:
+            else:
                 num_sea_monsters_found += 1
                 for sm_row, sm_col in sea_monster_coordinates:
                     new_row, new_col = row + sm_row, col + sm_col
