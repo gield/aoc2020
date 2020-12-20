@@ -63,9 +63,9 @@ top_left_tile_n = next(n for n, num_sides in num_fitting_sides.items() if num_si
 for top_left_permutation in permutations[top_left_tile_n]:
     for n, tile in tiles.items():
         relevant_permutations = [p
-                                for current_n, current_permutations in permutations.items()
-                                for p in current_permutations
-                                if current_n != top_left_tile_n]
+                                 for current_n, current_permutations in permutations.items()
+                                 for p in current_permutations
+                                 if current_n != top_left_tile_n]
         if any(is_tile1_above_tile2(p, top_left_permutation) for p in relevant_permutations):
             break
         if any(is_tile1_left_of_tile2(p, top_left_permutation) for p in relevant_permutations):
@@ -110,7 +110,7 @@ for row in range(num_rows):
     new_columns = []
     for col in range(num_cols):
         tile = image_tiles[(row, col)]
-        new_columns.append(tile[1:-1, 1:-1])
+        new_columns.append(tile[1:-1, 1:-1])  # type: ignore
     new_rows.append(np.hstack(new_columns))
 image = np.vstack(new_rows)
 
@@ -118,7 +118,7 @@ image = np.vstack(new_rows)
 sea_monster_str = """
                   # 
 #    ##    ##    ###
- #  #  #  #  #  #   """.split("\n")[1:]
+ #  #  #  #  #  #   """.split("\n")[1:]  # noqa: W291
 
 base_row, base_col = 1, 0
 sea_monster_coordinates = []
